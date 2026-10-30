@@ -1,0 +1,54 @@
+{
+  "order": false,
+  "user": false,
+  "description": {
+    "tr": "Sarıkazan İş Makineleri: ekskavatör, vinç ve yükleyici kiralama; operatörlü hizmet, periyodik kontrollü ekipman. (Demo site)",
+    "en": "Sarikazan Construction Machinery: excavator, crane and loader hire; operated service, periodically inspected equipment. (Demo site)",
+    "ar": "ساريكازان للآليات الإنشائية: تأجير حفارات ورافعات وجرافات بخدمة مع مشغّل ومعدات خاضعة للفحص الدوري. (موقع تجريبي)"
+  },
+  "keyword": {
+    "tr": "iş makinesi, vinç kiralama, ekskavatör",
+    "en": "construction machinery, crane hire, excavator",
+    "ar": "آليات إنشائية، تأجير رافعات، حفار"
+  },
+  "category": "Kurumsal",
+  "name": "Sarıkazan İş Makineleri",
+  "domain": "ismakinesi.webyapar.com",
+  "langs": {
+    "tr": true,
+    "en": true,
+    "ar": true,
+    "de": false,
+    "ru": false,
+    "es": false,
+    "fr": false,
+    "it": false,
+    "ja": false,
+    "zh": false,
+    "ko": false,
+    "pt": false
+  },
+  "logo": "logo.png",
+  "multi": false,
+  "publishMode": "static",
+  "font": {
+    "body": "inter",
+    "heading": "barlow-condensed",
+    "ar": {
+      "body": "ibm-plex-sans-arabic",
+      "heading": "noto-kufi-arabic"
+    }
+  },
+  "colorScheme": "auto",
+  "theme_color": "#E0A400",
+  "seo": {
+    "noindex": true
+  },
+  "cssTokens": {
+    "--mx-radius-sm": "2px",
+    "--mx-radius-md": "4px",
+    "--mx-radius-lg": "6px",
+    "--mx-radius-xl": "8px"
+  },
+  "icon": "icon.png"
+}
