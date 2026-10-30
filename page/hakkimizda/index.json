@@ -1,0 +1,47 @@
+{
+  "name": {
+    "tr": "Hakkımızda",
+    "en": "About",
+    "ar": "من نحن"
+  },
+  "status": "play",
+  "category": "",
+  "id": "hakkimizda",
+  "url": "",
+  "path": "hakkimizda",
+  "index": 4,
+  "icon": "info",
+  "desing": {
+    "header": [],
+    "body": [
+      "ktarkc",
+      "s89zce"
+    ],
+    "footer": []
+  },
+  "pathnext": "",
+  "description": {
+    "tr": "Sarıkazan İş Makineleri, iş güvenliğini ve periyodik kontrolü kiralamanın ön şartı sayan kurgusal bir demo firmadır. Bu sitedeki makine, belge ve adres bilgileri kurgusaldır.",
+    "en": "Sarikazan Construction Machinery is a fictional demo company that treats work safety and periodic inspection as preconditions of hire. Machines, documents and addresses on this site are fictional.",
+    "ar": "ساريكازان للآليات الإنشائية شركة تجريبية افتراضية تعدّ السلامة المهنية والفحص الدوري شرطين مسبقين للتأجير. الآليات والوثائق والعناوين في هذا الموقع افتراضية."
+  },
+  "spot": {
+    "tr": "",
+    "en": "",
+    "ar": ""
+  },
+  "desc": {},
+  "title": {
+    "tr": "Hakkımızda",
+    "en": "About",
+    "ar": "من نحن"
+  },
+  "keyword": {
+    "tr": "hakkımızda",
+    "en": "about",
+    "ar": "من نحن"
+  },
+  "text": {},
+  "update": "2026-10-30T22:17:57.198Z",
+  "date": "2026-10-30"
+}
