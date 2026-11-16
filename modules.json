@@ -81,7 +81,8 @@
         "vurguBg": "var(--mx-site-primary, #2563eb)",
         "vurguText": "var(--mx-site-primary-contrast, #ffffff)",
         "logoH": "44px",
-        "bgcolor": "var(--mx-site-bg, #ffffff)"
+        "bgcolor": "var(--mx-site-bg, #ffffff)",
+        "logoimg": "logo-ust.png"
       },
       "version": "1.0.0",
       "icon": "format_color_fill",
