@@ -1,194 +1,119 @@
-<section class="modulex-gm{{gmclass}}" id="gm-{{id}}" style="{{gmvars}}">
-  <div class="modulex-gm-wrap">
-    {{gmhead}}
-    {{gmchips}}
-    <p class="modulex-gm-count" role="status" aria-live="polite" aria-atomic="true">{{gmcount}}</p>
-    {{gmempty}}
-    <ul class="modulex-gm-grid">{{gmitems}}</ul>
+<section class="modulex-gs3{{gs3tek}}" id="gs3-{{id}}" data-gs3-sayac="{{counter}}">
+  <div class="modulex-gs3-wrap">
+    {{gs3head}}
+    {{gs3empty}}
+    <div class="modulex-gs3-sahne" role="region" aria-roledescription="carousel" aria-label="{{regionLabel}}" tabindex="0">
+      <div class="modulex-gs3-slides">{{gs3slides}}</div>
+      <button type="button" class="modulex-gs3-nav modulex-gs3-onceki" data-gs3-onceki aria-label="{{prevLabel}}" hidden><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+      <button type="button" class="modulex-gs3-nav modulex-gs3-sonraki" data-gs3-sonraki aria-label="{{nextLabel}}" hidden><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+    </div>
+    <p class="modulex-gs3-say" aria-live="polite" data-gs3-say>{{gs3sayac}}</p>
+    <ul class="modulex-gs3-thumbs" aria-label="{{thumbsLabel}}">{{gs3thumbs}}</ul>
   </div>
-  <script type="application/json" id="gm-{{id}}-veri">{{gmveri}}</script>
 </section>
 
 <style>
-  .modulex-gm {
-    box-sizing: border-box;
-    width: 100%;
-    padding-block: clamp(40px, 7vw, 80px);
-    padding-inline: clamp(16px, 4vw, 32px);
-    background: --bgcolor--;
-    color: --textcolor--;
-    --gm-c: var(--gm-cd);
+  /* Galeri — sahne + küçük resim şeridi (galeri-masonry-3). */
+  .modulex-gs3 {
+    box-sizing: border-box; width: 100%;
+    padding-block: clamp(36px, 6vw, 80px); padding-inline: clamp(16px, 4vw, 32px);
+    background: --bgcolor--; color: --textcolor--;
   }
-  .modulex-gm *,
-  .modulex-gm *::before,
-  .modulex-gm *::after { box-sizing: border-box; }
+  .modulex-gs3 *, .modulex-gs3 *::before, .modulex-gs3 *::after { box-sizing: border-box; }
+  .modulex-gs3 :where(span:not(.material-symbols-outlined), bdi, b, strong, em) { font: inherit; }
+  .modulex-gs3-wrap { max-width: --max--; margin-inline: auto; }
+  .modulex-gs3-head { margin-block-end: 24px; text-align: center; }
+  .modulex-gs3-title { margin: 0 0 8px; font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.4rem); line-height: 1.2; color: --textcolor--; }
+  .modulex-gs3-desc { margin: 0 auto; max-width: 60ch; line-height: 1.7; color: --mutedcolor--; }
+  .modulex-gs3-bos { margin: 0; text-align: center; color: --mutedcolor--; }
 
-  .modulex-gm-wrap { max-width: --max--; margin-inline: auto; }
-
-  .modulex-gm-head { margin-block-end: 28px; text-align: start; }
-  .modulex-gm-title { margin: 0 0 8px; font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem); line-height: 1.2; color: --textcolor--; }
-  .modulex-gm-desc { margin: 0; max-width: 62ch; color: --mutedcolor--; font-size: 1rem; line-height: 1.7; }
-
-  /* Filtre cipleri */
-  .modulex-gm-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-block-end: 16px; }
-  .modulex-gm-chips[hidden] { display: none; }
-  .modulex-gm-chip {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    min-height: 44px; min-width: 64px; padding-inline: 18px;
-    border: 1px solid --bordercolor--; border-radius: 999px;
-    background: --surface--; color: --textcolor--;
-    font: inherit; font-size: 0.95rem; font-weight: 500; cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  .modulex-gs3-sahne { position: relative; border-radius: --radius--; overflow: hidden; background: --surface2--; }
+  .modulex-gs3-sahne:focus-visible { outline: 3px solid --accent--; outline-offset: 3px; }
+  .modulex-gs3-slide { margin: 0; }
+  .modulex-gs3-slide[hidden] { display: none; }
+  .modulex-gs3-img, .modulex-gs3-ph { display: block; width: 100%; height: auto; aspect-ratio: --ratio--; object-fit: cover; }
+  .modulex-gs3-ph { display: flex; align-items: center; justify-content: center; color: --mutedcolor--; }
+  .modulex-gs3-ph .material-symbols-outlined { font-size: 56px; }
+  .modulex-gs3-cap { padding: 12px 16px; font-weight: 600; background: --surface--; color: --textcolor--; }
+  .modulex-gs3-nav {
+    position: absolute; top: 50%; transform: translateY(-50%); display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; border-radius: 50%; border: 1px solid --bordercolor--; background: --bgcolor--; color: --textcolor--;
+    cursor: pointer; box-shadow: 0 4px 14px color-mix(in srgb, --textcolor-- 20%, transparent);
   }
-  .modulex-gm-chip:hover { background: --surface2--; }
-  .modulex-gm-chip:active { transform: scale(0.97); }
-  .modulex-gm-chip[aria-pressed="true"] { background: --accent--; border-color: --accent--; color: --accentText--; }
-  .modulex-gm-chip-n { font-size: 0.8rem; opacity: 0.8; font-variant-numeric: tabular-nums; }
-  .modulex-gm-chip:focus-visible,
-  .modulex-gm-link:focus-visible { outline: 3px solid --accent--; outline-offset: 2px; }
+  .modulex-gs3-nav:hover { background: --accent--; color: --accentText--; }
+  .modulex-gs3-nav:focus-visible { outline: 3px solid --accent--; outline-offset: 2px; }
+  .modulex-gs3-onceki { inset-inline-start: 12px; }
+  .modulex-gs3-sonraki { inset-inline-end: 12px; }
+  [dir="rtl"] .modulex-gs3-nav .material-symbols-outlined { transform: scaleX(-1); }
+  .modulex-gs3-say { margin: 10px 0; min-height: 1.4em; text-align: center; font-size: 0.9rem; color: --mutedcolor--; font-variant-numeric: tabular-nums; }
 
-  .modulex-gm-count { margin: 0 0 18px; min-height: 1.4em; font-size: 0.9rem; color: --mutedcolor--; }
-  .modulex-gm-count:empty { display: none; }
-  .modulex-gm-empty { margin: 0; padding: 40px 16px; text-align: center; color: --mutedcolor--; background: --surface--; border-radius: --radius--; }
-
-  /* Izgara: masonry = CSS columns; sabit oran = grid */
-  .modulex-gm-grid { list-style: none; margin: 0; padding: 0; }
-  .modulex-gm-masonry .modulex-gm-grid { column-count: var(--gm-c); column-gap: --gap--; }
-  .modulex-gm-masonry .modulex-gm-item { break-inside: avoid; margin: 0 0 --gap--; }
-  .modulex-gm-fixed .modulex-gm-grid { display: grid; grid-template-columns: repeat(var(--gm-c), minmax(0, 1fr)); gap: --gap--; }
-  .modulex-gm-fixed .modulex-gm-item { aspect-ratio: var(--gm-ar); }
-  .modulex-gm-fixed .modulex-gm-img { height: 100%; object-fit: cover; }
-  .modulex-gm-fixed .modulex-gm-link { height: 100%; }
-
-  .modulex-gm-item {
-    position: relative; display: block; overflow: hidden; margin: 0;
-    border-radius: --radius--; background: --surface2--;
-    animation: modulexGmIn 0.45s ease both;
+  .modulex-gs3-thumbs {
+    list-style: none; margin: 0; padding: 4px 2px 8px; display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x proximity;
   }
-  .modulex-gm-item[hidden] { display: none; }
-  .modulex-gm-flush .modulex-gm-item { border-radius: 0; }
-
-  .modulex-gm-link { position: relative; display: block; width: 100%; color: inherit; text-decoration: none; cursor: pointer; }
-  .modulex-gm-static { cursor: default; }
-  .modulex-gm-link:focus-visible { outline-offset: -4px; }
-  .modulex-gm-img { display: block; width: 100%; height: auto; transition: transform 0.45s ease; }
-  .modulex-gm-link[href]:hover .modulex-gm-img { transform: scale(1.04); }
-
-  /* Gorselsiz ogede notr yer tutucu: oran w/h'ten, CLS yok */
-  .modulex-gm-ph {
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-    aspect-ratio: var(--gm-w) / var(--gm-h); width: 100%; padding: 12px; text-align: center;
-    background: linear-gradient(135deg, --surface2--, color-mix(in srgb, --surface2-- 78%, --textcolor--));
-    color: --textcolor--;
+  .modulex-gs3-tek .modulex-gs3-thumbs, .modulex-gs3-tek .modulex-gs3-say { display: none; }
+  .modulex-gs3-thumbs li { flex: 0 0 auto; scroll-snap-align: start; }
+  .modulex-gs3-thumb {
+    display: flex; align-items: center; justify-content: center; width: 112px; height: 70px; padding: 0; overflow: hidden;
+    border-radius: 8px; border: 2px solid transparent; background: --surface2--; color: --mutedcolor--; cursor: pointer; opacity: 0.7;
+    transition: opacity 0.2s ease, border-color 0.2s ease;
   }
-  .modulex-gm-fixed .modulex-gm-ph { aspect-ratio: auto; height: 100%; }
-  .modulex-gm-ph .material-symbols-outlined { font-size: 40px; opacity: 0.55; }
-  .modulex-gm-ph-t { font-size: 0.95rem; font-weight: 500; }
-  .modulex-gm-item-ph:nth-child(3n + 2) .modulex-gm-ph { background: linear-gradient(135deg, --surface--, color-mix(in srgb, --surface2-- 85%, --textcolor--)); }
+  .modulex-gs3-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .modulex-gs3-thumb:hover { opacity: 1; }
+  .modulex-gs3-thumb[aria-current="true"] { opacity: 1; border-color: --accent--; }
+  .modulex-gs3-thumb:focus-visible { outline: 3px solid --accent--; outline-offset: 2px; opacity: 1; }
 
-  /* Baslik: gorsel ustunde scrim ile (kontrast) */
-  .modulex-gm-cap {
-    position: absolute; inset-inline: 0; inset-block-end: 0;
-    display: flex; flex-direction: column; gap: 2px;
-    padding: 36px 14px 12px; text-align: start; color: #fff;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0));
-    pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-  }
-  .modulex-gm-cap-t { font-size: 1rem; font-weight: 600; line-height: 1.3; }
-  .modulex-gm-cap-c { font-size: 0.8rem; opacity: 0.9; }
-  .modulex-gm-cap-hover .modulex-gm-cap { opacity: 0; transform: translateY(8px); }
-  .modulex-gm-cap-hover .modulex-gm-link:hover .modulex-gm-cap,
-  .modulex-gm-cap-hover .modulex-gm-link:focus-visible .modulex-gm-cap { opacity: 1; transform: none; }
-  @media (hover: none) {
-    .modulex-gm-cap-hover .modulex-gm-cap { opacity: 1; transform: none; }
-  }
-
-  @keyframes modulexGmIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: none; }
-  }
-
-  @media (max-width: 1024px) { .modulex-gm { --gm-c: var(--gm-ct); } }
-  @media (max-width: 768px) {
-    .modulex-gm { --gm-c: var(--gm-cm); }
-    .modulex-gm-chips { flex-wrap: nowrap; overflow-x: auto; padding-block-end: 4px; scrollbar-width: thin; }
-    .modulex-gm-chip { flex: 0 0 auto; }
-    .modulex-gm-cap { padding-block-start: 28px; }
-    .modulex-gm-cap-t { font-size: 0.9rem; }
+  @media (max-width: 640px) {
+    .modulex-gs3-nav { width: 40px; height: 40px; }
+    .modulex-gs3-thumb { width: 84px; height: 56px; }
+    [class*="modulex"] { max-width: 100%; box-sizing: border-box; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .modulex-gm-item { animation: none; }
-    .modulex-gm-img, .modulex-gm-cap, .modulex-gm-chip { transition: none; }
-    .modulex-gm-link[href]:hover .modulex-gm-img { transform: none; }
+    .modulex-gs3 *, .modulex-gs3 *::before, .modulex-gs3 *::after { animation: none !important; transition: none !important; }
   }
 </style>
 
 <script>
+  /* Sahne geçişi: küçük resim / önceki-sonraki / ←→ (RTL'de ters). Otomatik oynatma yok. */
   (function () {
-    var kok = document.getElementById("gm-{{id}}");
-    if (!kok || kok.getAttribute("data-gm-hazir") === "1") { return; }
-    kok.setAttribute("data-gm-hazir", "1");
-    var veri = {};
-    try { veri = JSON.parse(document.getElementById("gm-{{id}}-veri").textContent); } catch (e) { veri = {}; }
-
-    function hazir(fn) {
-      if (window.mxLoad) { fn(); }
-      else if (document.readyState === "complete") { setTimeout(fn, 50); }
-      else { window.addEventListener("load", fn); }
-    }
-
-    function filtreKur() {
-      var ogeler = kok.querySelectorAll(".modulex-gm-item");
-      var chips = kok.querySelectorAll(".modulex-gm-chip");
-      var chipKap = kok.querySelector(".modulex-gm-chips");
-      var sayi = kok.querySelector(".modulex-gm-count");
-      var liste = [];
-      var i;
-      for (i = 0; i < ogeler.length; i++) {
-        liste.push({ i: i, cat: ogeler[i].getAttribute("data-gm-cat") || "" });
+    var kok = document.getElementById("gs3-{{id}}");
+    if (!kok || kok.getAttribute("data-gs3-hazir") === "1") { return; }
+    kok.setAttribute("data-gs3-hazir", "1");
+    var slaytlar = kok.querySelectorAll("[data-gs3-i]");
+    var kucukler = kok.querySelectorAll("[data-gs3-git]");
+    var say = kok.querySelector("[data-gs3-say]");
+    var sablon = kok.getAttribute("data-gs3-sayac") || "{i} / {n}";
+    var n = slaytlar.length;
+    if (n < 2) { return; }
+    var aktif = 0;
+    function git(i) {
+      aktif = (i + n) % n;
+      var j;
+      for (j = 0; j < n; j++) { slaytlar[j].hidden = j !== aktif; }
+      for (j = 0; j < kucukler.length; j++) {
+        if (j === aktif) { kucukler[j].setAttribute("aria-current", "true"); } else { kucukler[j].removeAttribute("aria-current"); }
       }
-      var f = window.MxFiltre.olustur({
-        items: liste,
-        facets: { cat: { tip: "tek" } },
-        url: true,
-        urlOnek: veri.prefix || "",
-        dil: veri.lang
+      if (kucukler[aktif] && kucukler[aktif].scrollIntoView) {
+        try { kucukler[aktif].scrollIntoView({ block: "nearest", inline: "nearest" }); } catch (e) { /* eski tarayıcı */ }
+      }
+      if (say) { say.textContent = sablon.replace("{i}", aktif + 1).replace("{n}", n); }
+    }
+    var onceki = kok.querySelector("[data-gs3-onceki]");
+    var sonraki = kok.querySelector("[data-gs3-sonraki]");
+    onceki.hidden = false;
+    sonraki.hidden = false;
+    onceki.addEventListener("click", function () { git(aktif - 1); });
+    sonraki.addEventListener("click", function () { git(aktif + 1); });
+    var i;
+    for (i = 0; i < kucukler.length; i++) {
+      kucukler[i].addEventListener("click", function (e) {
+        e.preventDefault();
+        git(parseInt(this.getAttribute("data-gs3-git"), 10) || 0);
       });
-      function uygula(s) {
-        var goster = {};
-        var j;
-        for (j = 0; j < s.tumu.length; j++) { goster[s.tumu[j].i] = true; }
-        for (j = 0; j < ogeler.length; j++) {
-          if (goster[j]) { ogeler[j].removeAttribute("hidden"); } else { ogeler[j].setAttribute("hidden", ""); }
-        }
-        var aktif = s.durum.facet.cat || "";
-        for (j = 0; j < chips.length; j++) {
-          chips[j].setAttribute("aria-pressed", (chips[j].getAttribute("data-gm-cat") || "") === aktif ? "true" : "false");
-        }
-        if (sayi) { sayi.textContent = window.MxFiltre.cogul(s.toplam, veri.count || {}, veri.lang); }
-      }
-      for (i = 0; i < chips.length; i++) {
-        chips[i].addEventListener("click", function (ev) {
-          var id = ev.currentTarget.getAttribute("data-gm-cat") || "";
-          var simdi = f.durum().facet.cat || "";
-          f.ayarla({ cat: simdi === id ? "" : id });
-        });
-      }
-      f.abone(uygula);
-      uygula(f.sonuc());
-      if (chipKap) { chipKap.removeAttribute("hidden"); }
     }
-
-    hazir(function () {
-      if (veri.lightbox) {
-        window.mxLoad("mxlightbox").then(function () {
-          window.MxLightbox.bagla(kok, "a.modulex-gm-link", { labels: veri.lb || {} });
-        });
-      }
-      if (veri.filter) {
-        window.mxLoad("mxfiltre").then(filtreKur);
-      }
+    kok.querySelector(".modulex-gs3-sahne").addEventListener("keydown", function (e) {
+      var rtl = document.documentElement.dir === "rtl";
+      if (e.key === "ArrowRight") { e.preventDefault(); git(aktif + (rtl ? -1 : 1)); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); git(aktif + (rtl ? 1 : -1)); }
     });
   })();
 </script>
